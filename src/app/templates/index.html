@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block style %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
+{% endblock %}
+{% block body %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+<div class="overlay">
+    <form action="/" method="POST">
+        <div class="con">
+            <header class="head-form">
+                <h2>Inicia sesión</h2>
+                <p>Inicie sesión aquí con su nombre de usuario y contraseña</p>
+            </header>
+            <br>
+            <div class="field-set">
+                <span class="input-item">
+                    <i class="fa fa-user-circle"></i>
+                </span>
+                <input class="form-input" id="txt-input" type="text" name="usuario" placeholder="@Usuario" required>
+                <br>
+                <span class="input-item">
+                    <i class="fa fa-key"></i>
+                </span>
+                <input class="form-input" type="password" placeholder="Contraseña" id="txt-input" name="contraseña" required>
+                <br>
+                <button class="log-in boton">Iniciar sesión</button>
+            </div>
+
+            <div class="other">
+                <p class="m-0"><a href="/registro">¿No tienes cuenta? Registrate</a></p>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

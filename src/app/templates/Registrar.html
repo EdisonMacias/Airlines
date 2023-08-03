@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block style %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
+{% endblock %}
+{% block body %}
+
+<div class="row justify-content-center mt-5">
+  <div class="col-md-4">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </div>
+</div>
+<div class="overlay">
+  <form action="/registro" method="POST">
+    <div class="con">
+      <header class="head-form">
+        <h2>Registro</h2>
+        <p>Agregue todos los datos para completar el registro</p>
+      </header>
+      <br>
+      <div class="field-set">
+        <span class="input-item">
+          <i class="fa fa-user-circle"></i>
+        </span>
+        <input class="form-input" id="txt-input" type="text" name="nombre" placeholder="Nombre,este sera su usuario!"
+          required>
+        <br>
+        <span class="input-item">
+          <i class="fa fa-user-circle"></i>
+        </span>
+        <input class="form-input" id="txt-input" type="text" name="apellido" placeholder="Apellido" required>
+        <br>
+        <span class="input-item">
+          <i class="fa fa-envelope"></i>
+        </span>
+        <input class="form-input" id="txt-input" type="text" name="correo" placeholder="Correo" required>
+        <br>
+        <span class="input-item">
+          <i class="fa fa-phone"></i>
+        </span>
+        <input class="form-input" id="txt-input" type="text" name="telefono" placeholder="telefono" required>
+        <br>
+        <span class="input-item">
+          <i class="fa fa-key"></i>
+        </span>
+        <input class="form-input" type="password" placeholder="Contraseña" id="passwordInput" name="password" required>
+        <br>
+        <p id="passwordMessage"></p>
+        <span class="input-item">
+          <i class="fa fa-key"></i>
+        </span>
+        <input class="form-input" type="password" placeholder="Repita su contraseña" id="repeatPasswordInput" name="password1" required>
+        <br>
+        <p id="repeatPasswordMessage"></p>
+        <button id="submitBtn" class="log-in boton">Registrar</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

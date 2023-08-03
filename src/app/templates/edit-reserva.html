@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card card-body">
+        <form action="/updateReserva/{{reserva.id}}" method="POST">
+          <div class="form-group">
+            <select class="form-control" name="destino" id="destino" required>
+              {% for destino in destino %}
+                <option>{{destino.nombre}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control" name="cliente" id="cliente" required>
+              {% for cliente in cliente %}
+                <option>{{cliente.nombre}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="date" class="form-control" name="reser" required>
+          </div>
+          <button class="btn btn-primary btn-block">
+            Actualizar 
+          </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

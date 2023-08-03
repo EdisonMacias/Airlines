@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% block Bienve %}
+    <h5 class="text-white"><i class="fas fa-user"></i> Bienvenido {{cliente.nombre}} {{cliente.apellido}}</h5>
+{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+{% block Nav %}
+  <a class="navbar-brand" href="/logout">Cerrar Sesion</a>
+{% endblock %}
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div>
+            <h1 class="text-white">LAS MEJORES VACACIONES CON NOSOTROS</h1>
+        </div>
+    </div>
+</div>
+
+<div class="center">
+    <div class="wrapper">
+      <div class="inner">
+        {% for destino in destino %}
+        <div class="card">
+          <img src="{{url_for('static', filename='img/Viaje.png')}}">
+          <div class="content">
+            <h1>{{destino.nombre}}</h1>
+            <h3>{{destino.ubicacion}}</h3>
+            <a href="/Info-destino/{{destino.id}}/{{cliente.id}}" class="btn btn-dark"><i class="fas fa-plus"></i></a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div class="map">
+      <button class="active first"></button>
+      <button class="second"></button>
+      <button class="third"></button>
+      <button class="fourth"></button>
+      <button class="fifth"></button>
+    </div>
+  </div>
+  <script>
+    const buttonsWrapper = document.querySelector(".map");
+const slides = document.querySelector(".inner");
+
+buttonsWrapper.addEventListener("click", e => {
+  if (e.target.nodeName === "BUTTON") {
+    Array.from(buttonsWrapper.children).forEach(item =>
+      item.classList.remove("active")
+    );
+    if (e.target.classList.contains("first")) {
+      slides.style.transform = "translateX(-0%)";
+      e.target.classList.add("active");
+    } else if (e.target.classList.contains("second")) {
+      slides.style.transform = "translateX(-20%)";
+      e.target.classList.add("active");
+    } else if (e.target.classList.contains('third')){
+      slides.style.transform = 'translatex(-40%)';
+      e.target.classList.add('active');
+    } else if (e.target.classList.contains('fourth')){
+        slides.style.transform = 'translatex(-60%)';
+        e.target.classList.add('active');
+    }else if (e.target.classList.contains('fifth')){
+        slides.style.transform = 'translatex(-80%)';
+        e.target.classList.add('active');
+    }
+  }
+});
+  </script>
+{% endblock %}

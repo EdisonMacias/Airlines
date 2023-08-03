@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% block Bienve %}
+<h5 class="text-white"><i class="fas fa-user"></i> Bienvenido {{cliente.nombre}}
+  {{cliente.apellido}}</h5>
+{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+{% block Nav %}
+<a class="navbar-brand" href="/logout">Cerrar Sesion</a>
+{% endblock %}
+{% block regresar %}/user/{{cliente.id}}{% endblock %}
+{% block body %}
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<div class="container my-4 w-100 cardEvents">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <div class="card card-eventUpcoming">
+        <div class="card-horizontal">
+          <div class="img-square-wrapper">
+            <img class="imageEvent "
+              src="{{url_for('static', filename='img/Paisaje.png')}}"
+              alt="Card image cap ">
+          </div>
+          <div class="card-body card-body-events">
+            <h1 class="text-center">Descripcion del destino</h1>
+            <h4 class="card-title title-event"><b>Destino:</b>
+              {{destino.nombre}}</h4>
+            <h4 class="card-title title-event"><b>Pais:</b>
+              {{destino.ubicacion}}</h4>
+            <h4 class="card-title title-event"><b>Descripcion:</b>
+              {{destino.descripcion}}</h4>
+            <h4 class="card-title title-event"><b>Fecha de Inicio:</b>
+              {{destino.fechaInicio}}</h4>
+            <h4 class="card-title title-event"><b>Fecha de Fin:</b>
+              {{destino.fechaFin}}</h4>
+              <form action="/add_reservar/{{destino.id}}/{{cliente.id}}" method="POST">
+                <div class="form-row row">
+                  <h3 for="inputPassword" class="card-title title-event col-sm-4 col-form-label"><b>Fecha de Reservacion:</b></h3>
+                  <div class="col-sm-6">
+                    <input type="date" class="form-control" id="reser" name="reser" placeholder="Password">
+                  </div>
+                </div>
+                <button class="btn btn-primary" style="margin-left: 300px; margin-top: 10px;">Reservar</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
