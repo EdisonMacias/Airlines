@@ -12,3 +12,4 @@ zipp==3.8.0
 python-dotenv
 passlib
 jwt
+parse
