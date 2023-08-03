@@ -1,9 +1,6 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash, session
 from db import mysql
 from passlib.hash import bcrypt
-import jwt
-import datetime
-from flask import current_app
 from functools import wraps
 
 login = Blueprint('login', __name__, template_folder='app/templates')
@@ -25,15 +22,6 @@ def login_required(view_func):
 def is_user_authenticated():
     return 'user_id' in session
 
-def generate_jwt_token(username):
-    payload = {
-        'username': username,
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1)  # Token válido por 1 día
-    }
-    secret_key = current_app.config['SECRET_KEY']  # Asegúrate de tener configurada tu clave secreta en Flask
-    token = jwt.encode(payload, secret_key, algorithm='HS256')
-    return token
-
 @login.route('/', methods=['GET','POST'])
 def Index():
     if request.method == 'POST':
@@ -47,15 +35,13 @@ def Index():
         if data and verify_password(Contraseña, data["Password"]):
             cur.close()
             session['user_id'] = verify_password(Contraseña, data["Password"])
-            token = generate_jwt_token(Usuario)
-            return redirect('/cliente?token=' + token)
+            return redirect('/cliente')
         elif data1 and verify_password(Contraseña, data1["password"]):
             cur.execute('SELECT id FROM clientes WHERE nombre = %s', (Usuario,))
             data2 = cur.fetchone()
             cur.close()
             session['user_id'] = data2["id"]
-            token = generate_jwt_token(Usuario)
-            return redirect('/user?token='+token)
+            return redirect('/user')
         else:
             cur.close()
             flash('Usuario y/o contraseña incorrectos')
