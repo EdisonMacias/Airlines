@@ -17,7 +17,9 @@ if database_url:
     app.config['MYSQL_PASSWORD'] = url_parts.password
     app.config['MYSQL_HOST'] = url_parts.hostname
     app.config['MYSQL_DB'] = url_parts.path.lstrip('/')
+    app.config['MYSQL_PORT'] = url_parts.port  # Agrega esta línea para especificar el puerto
 
+# Crea la instancia de MySQL
 mysql = MySQL(app)
 
 
