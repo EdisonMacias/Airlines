@@ -14,8 +14,8 @@ database_url = os.environ.get('DATABASE_URL')
 if database_url:
     mysql_info = database_url.split('//')[1].split(':')
     app.config['MYSQL_USER'] = mysql_info[0]
-    app.config['MYSQL_PASSWORD'] = mysql_info[1].split('@')[0]
-    app.config['MYSQL_HOST'] = mysql_info[1].split('@')[1].split('/')[0]
-    app.config['MYSQL_DB'] = mysql_info[1].split('@')[1].split('/')[1].split('?')[0]
+    app.config['MYSQL_PASSWORD'] = mysql_info[0].split('@')[0]
+    app.config['MYSQL_HOST'] = mysql_info[0].split('@')[1].split('/')[0]
+    app.config['MYSQL_DB'] = mysql_info[0].split('@')[1].split('/')[1].split('?')[0]
 
 
