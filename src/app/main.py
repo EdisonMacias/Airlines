@@ -15,4 +15,4 @@ app.register_blueprint(user)
 # starting the app
 if __name__ == "__main__":
     
-    app.run(port=3000, debug=True)
+    app.run()
