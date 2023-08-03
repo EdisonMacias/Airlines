@@ -13,6 +13,7 @@ load_dotenv()  # Toma las variables de entorno de .env
 database_url = os.environ.get('DATABASE_URL')
 if database_url:
     url_parts = urlparse(database_url)
+    print( url_parts.username)
     app.config['MYSQL_USER'] = url_parts.username
     app.config['MYSQL_PASSWORD'] = url_parts.password
     app.config['MYSQL_HOST'] = url_parts.hostname
