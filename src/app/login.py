@@ -31,7 +31,7 @@ def generate_jwt_token(username):
         'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1)  # Token válido por 1 día
     }
     secret_key = current_app.config['SECRET_KEY']  # Asegúrate de tener configurada tu clave secreta en Flask
-    token = jwt.encode(payload, secret_key, algorithm='HS256')
+    token = jwt.encode_token(payload, secret_key, algorithm='HS256')
     return token
 
 @login.route('/', methods=['GET','POST'])
