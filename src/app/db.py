@@ -2,7 +2,7 @@ from app import app
 from flask_mysqldb import MySQL
 from dotenv import load_dotenv
 import os
-from parse import urlparse
+from urllib.parse import urlparse
 
 load_dotenv()  # Toma las variables de entorno de .env
 
