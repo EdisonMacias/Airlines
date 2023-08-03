@@ -1,3 +1,4 @@
+import os
 from app import app
 from Clientes import cliente
 from login import login
@@ -14,4 +15,5 @@ app.register_blueprint(user)
 
 # starting the app
 if __name__ == "__main__":
-    app.run(port=3000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
