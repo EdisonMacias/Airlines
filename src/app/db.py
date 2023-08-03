@@ -18,5 +18,4 @@ if database_url:
     app.config['MYSQL_HOST'] = mysql_info[1].split('@')[1].split('/')[0]
     app.config['MYSQL_DB'] = mysql_info[1].split('@')[1].split('/')[1].split('?')[0]
 
-# MySQL Connection
-mysql = MySQL(app)
+
