@@ -6,7 +6,7 @@ import os
 load_dotenv()  # Toma las variables de entorno de .env
 
 # Configuración de la conexión MySQL
-mysql = MySQL(app)
+
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # Obtén la URL de conexión de la base de datos de la variable de entorno DATABASE_URL
@@ -28,5 +28,6 @@ if database_url:
     app.config['MYSQL_HOST'] = host
     app.config['MYSQL_DB'] = database
 
+mysql = MySQL(app)
 
 
