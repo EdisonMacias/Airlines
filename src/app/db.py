@@ -5,6 +5,7 @@ import os
 
 load_dotenv()  # take environment variables from .env.
 
+database_url = os.environ.get('DATABASE_URL')
 # Mysql Settings
 app.config['MYSQL_USER'] = os.getenv('MYSQL_USER') or 'root'
 app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD') or ''
