@@ -3,15 +3,20 @@ from flask_mysqldb import MySQL
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # take environment variables from .env.
+load_dotenv()  # Toma las variables de entorno de .env
 
-database_url = os.environ.get('DATABASE_URL')
-# Mysql Settings
-app.config['MYSQL_USER'] = os.getenv('MYSQL_USER') or 'root'
-app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD') or ''
-app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST') or 'localhost' # localhost
-app.config['MYSQL_DB'] = os.getenv('MYSQL_DB') or 'airlines'
+# Configuración de la conexión MySQL
+mysql = MySQL(app)
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
+# Obtén la URL de conexión de la base de datos de la variable de entorno DATABASE_URL
+database_url = os.environ.get('DATABASE_URL')
+if database_url:
+    mysql_info = database_url.split('//')[1].split(':')
+    app.config['MYSQL_USER'] = mysql_info[0]
+    app.config['MYSQL_PASSWORD'] = mysql_info[1].split('@')[0]
+    app.config['MYSQL_HOST'] = mysql_info[1].split('@')[1].split('/')[0]
+    app.config['MYSQL_DB'] = mysql_info[1].split('@')[1].split('/')[1].split('?')[0]
 
 # MySQL Connection
 mysql = MySQL(app)
