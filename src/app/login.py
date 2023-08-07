@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash, session
 from db import mysql
-from passlib.hash import bcrypt
+from passlib.hash import bcrypt                     
 from functools import wraps
 
 login = Blueprint('login', __name__, template_folder='app/templates')
