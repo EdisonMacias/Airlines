@@ -33,22 +33,22 @@
           <i class="fa fa-user-circle"></i>
         </span>
         <input class="form-input" id="txt-input" type="text" name="nombre" placeholder="Nombre,este sera su usuario!"
-          required>
+          required value="{{ session['nombres'] }}">
         <br>
         <span class="input-item">
           <i class="fa fa-user-circle"></i>
         </span>
-        <input class="form-input" id="txt-input" type="text" name="apellido" placeholder="Apellido" required>
+        <input class="form-input" id="txt-input" type="text" name="apellido" placeholder="Apellido" required value="{{ session['apellidos'] }}">
         <br>
         <span class="input-item">
           <i class="fa fa-envelope"></i>
         </span>
-        <input class="form-input" id="txt-input" type="text" name="correo" placeholder="Correo" required>
+        <input class="form-input" id="txt-input" type="text" name="correo" placeholder="Correo" required value="{{ session['correos'] }}">
         <br>
         <span class="input-item">
           <i class="fa fa-phone"></i>
         </span>
-        <input class="form-input" id="txt-input" type="text" name="telefono" placeholder="telefono" required>
+        <input class="form-input" id="txt-input" type="text" name="telefono" placeholder="telefono" required value="{{ session['telefonos'] }}">
         <br>
         <span class="input-item">
           <i class="fa fa-key"></i>

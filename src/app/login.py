@@ -2,6 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash,
 from db import mysql
 from passlib.hash import bcrypt                     
 from functools import wraps
+import re
 
 login = Blueprint('login', __name__, template_folder='app/templates')
 
@@ -89,9 +90,23 @@ def registros():
         correo = request.form['correo']
         telefono = request.form['telefono']
         password = request.form['password']
-
+        if not re.match(r'^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$', nombre):
+            flash('Ingresa un nombre válido.')
+        elif not re.match(r'^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$', apellido):
+            flash('Ingresa un apellido válido.')
+        elif not re.match(r'\S+@\S+\.\S+', correo):
+            flash('Ingresa un correo electrónico válido.')
+        elif not re.match(r'^\d{10}$', telefono):
+            flash('Ingresa un número de teléfono válido (10 dígitos).')
         # Insertar el nuevo usuario en la base de datos, ahora con la contraseña encriptada
-        if insert_user(nombre, apellido, correo, telefono, password):
+        elif insert_user(nombre, apellido, correo, telefono, password):
+            session.pop('nombres', None)
+            session.pop('apellidos', None)
+            session.pop('correos', None)
+            session.pop('telefonos', None)
             return redirect(url_for('login.Index'))  # Redireccionar a la página de inicio de sesión después del registro
-
+        session['nombres'] = nombre
+        session['apellidos'] = apellido
+        session['correos'] = correo
+        session['telefonos'] = telefono
     return render_template('Registrar.html')
