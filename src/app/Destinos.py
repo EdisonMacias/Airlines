@@ -4,7 +4,6 @@ from login import login_required
 
 destino = Blueprint('destino', __name__, template_folder='app/templates')
 
-
 @destino.route('/destino')
 @login_required
 def Index():

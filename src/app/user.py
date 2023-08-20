@@ -4,7 +4,6 @@ from login import login_required
 
 user = Blueprint('user', __name__, template_folder='app/templates')
 
-
 @user.route('/user')
 @login_required
 def User():
@@ -16,7 +15,6 @@ def User():
     data1 = cur.fetchall()
     cur.close()
     return render_template('User.html', destino=data, cliente=data1[0])
-
 
 @user.route('/add_reservar/<int:idd>/<int:idc>', methods=['POST'])
 @login_required

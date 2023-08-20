@@ -4,7 +4,6 @@ from login import login_required
 
 reserva = Blueprint('reserva', __name__, template_folder='app/templates')
 
-
 @reserva.route('/reserva')
 @login_required
 def Index():
@@ -19,7 +18,6 @@ def Index():
     data3 = cur.fetchall()
     cur.close()
     return render_template('Reserva.html', reservar=data3, reserva=data, destino=data1, cliente=data2)
-
 
 @reserva.route('/add_reserva', methods=['POST'])
 @login_required
@@ -57,7 +55,6 @@ def get_reserva(id):
     print(data[0])
     return render_template('edit-reserva.html', reserva=data[0], destino=data1, cliente=data2)
 
-
 @reserva.route('/updateReserva/<int:id>', methods=['POST'])
 @login_required
 def update_reserva(id):
@@ -80,7 +77,6 @@ def update_reserva(id):
         flash('Reservacion actualizado correctamente')
         mysql.connection.commit()
         return redirect(url_for('reserva.Index'))
-
 
 @reserva.route('/deleteReserva/<string:id>', methods=['POST', 'GET'])
 @login_required

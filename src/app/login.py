@@ -35,7 +35,7 @@ def Index():
         data1 = cur.fetchone()
         if data and verify_password(Contraseña, data["Password"]):
             cur.close()
-            session['user_id'] = verify_password(Contraseña, data["Password"])
+            session['user_id'] = "Admin"
             return redirect('/cliente')
         elif data1 and verify_password(Contraseña, data1["password"]):
             cur.execute('SELECT id FROM clientes WHERE nombre = %s', (Usuario,))
@@ -49,7 +49,6 @@ def Index():
             return render_template('index.html')
     return render_template('index.html')
 
-# Ruta para cerrar sesión
 @login.route('/logout')
 def logout():
     # Eliminar el usuario de la sesión si está presente
@@ -63,7 +62,6 @@ def encrypt_password(password):
     hashed_password = bcrypt.hash(password)  # Generar el hash bcrypt
     return hashed_password
 
-# Función para insertar un nuevo usuario en la base de datos
 def insert_user(nombre, apellido, correo, telefono, password):
     # Encriptar la contraseña antes de almacenarla
     hashed_password = encrypt_password(password)
